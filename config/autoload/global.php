@@ -12,5 +12,8 @@
  */
 
 return [
-    // ...
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn'    => 'mysql:dbname=next;host=localhost;charset=utf8',
+    ],
 ];
