@@ -24,11 +24,6 @@ return [
             ],
         ],
     ],
-    'controllers' => [
-        'factories' => [
-            Controller\GenerateController::class => InvokableFactory::class,
-        ],
-    ],
     'view_manager' => [
         'template_path_stack' => [
             'next' => __DIR__ . '/../view',
