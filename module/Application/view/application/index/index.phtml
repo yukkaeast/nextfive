@@ -9,3 +9,39 @@
         </p>
     </div>
 </div>
+<div class="container">
+    <script id="next-handlebars-template" type="text/x-handlebars-template">
+        {{#if races}}
+        <div class="d-flex flex-row">
+            <ul class="nav nav-tabs nav-tabs-next col-3" role="navigation">
+                {{#each races}}
+                <li class="nav-item">
+                    <a href="#race{{id}}" class="nav-link" data-toggle="tab" role="tab" aria-controls="race{{id}}">
+                        {{type_name}}<br />
+                        {{meeting_name}}<br />
+                        {{close_time}}
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="tab-content col-9">
+                {{#each races}}
+                <div class="tab-pane fade" id="race{{id}}" role="tabpanel">
+                    {{type_name}}<br />
+                    {{meeting_name}}<br />
+                    {{close_time}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{else}}
+        <div class="jumbotron">
+            <div class="container">
+                <p>No races were found, please generate new ones</p>
+                <p><a class="btn btn-secondary btn-lg" href="<?= $this->url('next-generate') ?>">Go back to Generation page</a></p>
+            </div>
+        </div>
+        {{/if}}
+    </script>
+    <div id="next-handlebars-container"></div>
+</div>

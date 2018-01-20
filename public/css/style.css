@@ -1,0 +1,33 @@
+.nav-tabs.nav-tabs-next {
+    border: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    position: relative;
+}
+.nav-tabs.nav-tabs-next::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    right: 15px;
+    border-right: 1px solid #dee2e6;
+    z-index: -1;
+}
+
+.nav-tabs .nav-link {
+    color: #495057;
+    border-radius: .25rem 0 0 .25rem;
+}
+
+.nav-tabs.nav-tabs-next .nav-link.active,
+.nav-tabs.nav-tabs-next .nav-link:hover {
+    border-color: #dee2e6 #fff #dee2e6 #dee2e6;
+}
+.nav-tabs.nav-tabs-next .nav-item {
+    margin-right: -1px;
+}
