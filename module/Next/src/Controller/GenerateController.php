@@ -43,13 +43,13 @@ class GenerateController extends AbstractActionController
         $types = $this->typeTable->fetchAll();
         // Populate Types
         if ($types->count() == 0) {
-            $this->meetingTable->getTableGateway()->insert([
+            $this->typeTable->getTableGateway()->insert([
                 'name' => 'Thoroughbred'
             ]);
-            $this->meetingTable->getTableGateway()->insert([
+            $this->typeTable->getTableGateway()->insert([
                 'name' => 'Greyhounds'
             ]);
-            $this->meetingTable->getTableGateway()->insert([
+            $this->typeTable->getTableGateway()->insert([
                 'name' => 'Harness'
             ]);
             $types = $this->typeTable->fetchAll();
@@ -104,7 +104,7 @@ class GenerateController extends AbstractActionController
         foreach ($arMeetings as $meeting) {
             for ($i = 0; $i < rand(1, 3); $i++) {
 
-                $datetime = new \DateTime();
+                $datetime = new \DateTime('now', new \DateTimeZone('UTC'));
                 // add up to 2 hours to current time
                 $datetime->add(new \DateInterval('PT' . rand(5, 120) . 'M'));
 
@@ -124,6 +124,7 @@ class GenerateController extends AbstractActionController
                 $data = [
                     'race_id' => $newRaceId,
                     'competitor_id' => array_rand($arCompetitors),
+                    'position' => $i + 1
                 ];
                 $this->competitorRaceTable->getTableGateway()->insert($data);
             }

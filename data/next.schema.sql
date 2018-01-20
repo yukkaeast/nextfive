@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `competitor_race` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `competitor_id` int(11) NOT NULL,
   `race_id` int(11) NOT NULL,
+  `position` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_competitor_race` (`competitor_id`,`race_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=392 DEFAULT CHARSET=utf8;
@@ -34,8 +35,3 @@ CREATE TABLE IF NOT EXISTS `type` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
-INSERT INTO `type` (`id`, `name`) VALUES
-(1, 'Thoroughbred'),
-(2, 'Greyhounds'),
-(3, 'Harness');
