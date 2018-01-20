@@ -59,8 +59,17 @@ class Module
                     return new Controller\GenerateController(
                         $container->get(Model\TypeTable::class),
                         $container->get(Model\MeetingTable::class),
-                        $container->get(Model\CompetitorTable::class),
                         $container->get(Model\RaceTable::class),
+                        $container->get(Model\CompetitorTable::class),
+                        $container->get(Model\CompetitorRaceTable::class)
+                    );
+                },
+                Controller\GetController::class => function ($container) {
+                    return new Controller\GetController(
+                        $container->get(Model\TypeTable::class),
+                        $container->get(Model\MeetingTable::class),
+                        $container->get(Model\RaceTable::class),
+                        $container->get(Model\CompetitorTable::class),
                         $container->get(Model\CompetitorRaceTable::class)
                     );
                 },

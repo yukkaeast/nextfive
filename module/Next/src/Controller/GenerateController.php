@@ -24,16 +24,16 @@ class GenerateController extends AbstractActionController
     public function __construct(
         TypeTable $typeTable,
         MeetingTable $meetingTable,
-        CompetitorTable $competitorTable,
         RaceTable $raceTable,
+        CompetitorTable $competitorTable,
         CompetitorRaceTable $competitorRaceTable
     )
     {
         $this->faker = \Faker\Factory::create();
         $this->typeTable = $typeTable;
         $this->meetingTable = $meetingTable;
-        $this->competitorTable = $competitorTable;
         $this->raceTable = $raceTable;
+        $this->competitorTable = $competitorTable;
         $this->competitorRaceTable = $competitorRaceTable;
     }
 
@@ -43,13 +43,13 @@ class GenerateController extends AbstractActionController
         $types = $this->typeTable->fetchAll();
         // Populate Types
         if ($types->count() == 0) {
-            $this->meetingTable->typeTable()->insert([
+            $this->meetingTable->getTableGateway()->insert([
                 'name' => 'Thoroughbred'
             ]);
-            $this->meetingTable->typeTable()->insert([
+            $this->meetingTable->getTableGateway()->insert([
                 'name' => 'Greyhounds'
             ]);
-            $this->meetingTable->typeTable()->insert([
+            $this->meetingTable->getTableGateway()->insert([
                 'name' => 'Harness'
             ]);
             $types = $this->typeTable->fetchAll();

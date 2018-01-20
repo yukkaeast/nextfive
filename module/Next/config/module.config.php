@@ -6,7 +6,7 @@
 
 namespace Next;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Router\Http\Segment;
 use Zend\Router\Http\Literal;
 
 return [
@@ -22,11 +22,27 @@ return [
                     ],
                 ],
             ],
+            'get-generate' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/get[/:action]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\GetController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager' => [
         'template_path_stack' => [
             'next' => __DIR__ . '/../view',
         ],
+        'strategies' => array(
+            'ViewJsonStrategy',
+        ),
     ],
 ];
