@@ -64,7 +64,8 @@ class GetController extends AbstractActionController
             ["type_name" => "name"],
             Join::JOIN_LEFT
         );
-        $nextSelect->where(new \Zend\Db\Sql\Predicate\Expression('race.close_time > ?',  (new \DateTime())->format('Y-m-d H:i:s')));
+        $datetime_now = (new \DateTime(null, new \DateTimeZone("UTC")))->format('Y-m-d H:i:s');
+        $nextSelect->where(new \Zend\Db\Sql\Predicate\Expression('race.close_time > ?',  $datetime_now));
         $nextSelect->order("race.close_time asc");
         $nextSelect->limit(5);
 
@@ -72,6 +73,65 @@ class GetController extends AbstractActionController
         $resultSet = new ResultSet();
         $resultSet->initialize($nextSql->prepareStatementForSqlObject($nextSelect)->execute());
 
-        return new JsonModel($resultSet->toArray());
+        return new JsonModel([
+            "races" => $resultSet->toArray()
+        ]);
+    }
+
+    public function raceAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (0 === $id) {
+            return new JsonModel([]);
+        }
+
+        /** @var \Zend\Db\Sql\Sql $nextSql */
+        $raceSql = $this->raceTable->getTableGateway()->getSql();
+
+        /** @var \Zend\Db\Sql\Select $nextSql */
+        $raceSelect = $raceSql->select();
+        $raceSelect->join(
+            "meeting",
+            "meeting.id = race.meeting_id",
+            ["meeting_name" => "name"],
+            Join::JOIN_LEFT
+        );
+        $raceSelect->join(
+            "type",
+            "type.id = meeting.type_id",
+            ["type_name" => "name"],
+            Join::JOIN_LEFT
+        );
+        $raceSelect->where(new \Zend\Db\Sql\Predicate\Expression('race.id = ?',  $id));
+
+        $debug = 1;
+
+        /** @var \Zend\Db\ResultSet\ResultSet $resultSet */
+        $raceResultSet = new ResultSet();
+        $raceResultSet->initialize($raceSql->prepareStatementForSqlObject($raceSelect)->execute());
+
+
+        /** @var \Zend\Db\Sql\Sql $nextSql */
+        $competitorRaceSql = $this->competitorRaceTable->getTableGateway()->getSql();
+
+        /** @var \Zend\Db\Sql\Select $nextSql */
+        $competitorRaceSelect = $competitorRaceSql->select();
+        $competitorRaceSelect->join(
+            "competitor",
+            "competitor.id = competitor_race.competitor_id",
+            ["competitor_name" => "name"],
+            Join::JOIN_LEFT
+        );
+        $competitorRaceSelect->where(new \Zend\Db\Sql\Predicate\Expression('competitor_race.race_id = ?',  $id));
+        $competitorRaceSelect->order("competitor_race.position asc");
+
+        /** @var \Zend\Db\ResultSet\ResultSet $resultSet */
+        $competitorRaceResultSet = new ResultSet();
+        $competitorRaceResultSet->initialize($competitorRaceSql->prepareStatementForSqlObject($competitorRaceSelect)->execute());
+
+        return new JsonModel([
+            "race" => $raceResultSet->toArray()[0],
+            "competitors" => $competitorRaceResultSet->toArray()
+        ]);
     }
 }
