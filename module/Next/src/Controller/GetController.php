@@ -104,8 +104,6 @@ class GetController extends AbstractActionController
         );
         $raceSelect->where(new \Zend\Db\Sql\Predicate\Expression('race.id = ?',  $id));
 
-        $debug = 1;
-
         /** @var \Zend\Db\ResultSet\ResultSet $resultSet */
         $raceResultSet = new ResultSet();
         $raceResultSet->initialize($raceSql->prepareStatementForSqlObject($raceSelect)->execute());

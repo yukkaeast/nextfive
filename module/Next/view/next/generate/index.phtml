@@ -1,6 +1,27 @@
+<?php
+/**
+* @package Next
+* @author Yury Ostapenko
+*/
+?>
 <div class="jumbotron">
     <div class="container">
-        <p>All Data has been generated</p>
-        <p><a class="btn btn-secondary btn-lg" href="<?= $this->url('home') ?>">Go back to Home page</a></p>
+        <p>All Data has been successfully generated.</p>
+        <p>You will be redirect in <span class="js-redirect-countdown font-weight-bold">4</span> seconds</p>
+
+        <p class="mt-5"><a class="btn btn-secondary" href="<?= $this->url('home') ?>">Go back to Home page</a></p>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        var interval = window.setInterval(function () {
+            var seconds = $('.js-redirect-countdown').text();
+            if (seconds == 1) {
+                clearInterval(interval);
+                window.location.href = "<?= $this->url('home') ?>";
+            } else {
+                $('.js-redirect-countdown').text(seconds-1);
+            }
+        }, 1000);
+    });
+</script>

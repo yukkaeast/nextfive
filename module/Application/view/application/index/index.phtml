@@ -1,3 +1,9 @@
+<?php
+/**
+ * @package Application
+ * @author Yury Ostapenko
+ */
+?>
 <div class="jumbotron">
     <div class="container">
         <h1>Next 5</h1>
@@ -17,9 +23,9 @@
                 {{#each races}}
                 <li class="nav-item">
                     <a href="#race{{id}}" class="nav-link" data-toggle="tab" role="tab" aria-controls="race{{id}}">
-                        {{type_name}}<br />
-                        {{meeting_name}}<br />
-                        {{close_time}}
+                        <small class="text-secondary d-inline-block">{{type_name}}</small>
+                        <p class="h5">{{meeting_name}}</p>
+                        <span class="js-countdown font-italic">{{close_time}}</span>
                     </a>
                 </li>
                 {{/each}}
@@ -27,20 +33,39 @@
             <div class="tab-content col-9">
                 {{#each races}}
                 <div class="tab-pane fade" id="race{{id}}" role="tabpanel">
-                    {{type_name}}<br />
-                    {{meeting_name}}<br />
-                    {{close_time}}
                 </div>
                 {{/each}}
             </div>
         </div>
         {{else}}
-        <div class="jumbotron">
-            <div class="container">
-                <p>No races were found, please generate new ones</p>
-                <p><a class="btn btn-secondary btn-lg" href="<?= $this->url('next-generate') ?>">Go back to Generation page</a></p>
-            </div>
+        <div class="alert alert-warning" role="alert">
+            <p class="font-weight-bold">No races were found</p>
+            <p>You will be redirect in <span class="js-redirect-countdown font-weight-bold" data-href="<?= $this->url('next-generate') ?>">4</span> seconds</p>
         </div>
+        {{/if}}
+    </script>
+    <script id="race-handlebars-template" type="text/x-handlebars-template">
+        {{#if race}}
+        <h1><small class="text-secondary">{{race.type_name}}</small> <b>{{race.meeting_name}}</b></h1>
+        <p><i>{{formateDate race.close_time}}</i></p>
+        {{#if competitors}}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Position</th>
+                <th scope="col">Competitor's Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each competitors}}
+            <tr>
+                <th scope="row">{{position}}</th>
+                <td>{{competitor_name}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        {{/if}}
         {{/if}}
     </script>
     <div id="next-handlebars-container"></div>

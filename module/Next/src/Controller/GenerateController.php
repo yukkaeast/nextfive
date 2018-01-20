@@ -39,6 +39,7 @@ class GenerateController extends AbstractActionController
 
     public function indexAction()
     {
+
         /** @var \Zend\Db\ResultSet\ResultSet $types */
         $types = $this->typeTable->fetchAll();
         // Populate Types
@@ -66,7 +67,7 @@ class GenerateController extends AbstractActionController
 
         // Populate Meetings
         if ($meetings->count() < 20) {
-            for ($i = $meetings->count(); $i < 20; $i++) {
+            for ($i = 0; $i < 20; $i++) {
                 $data = [
                     'name' => $this->faker->city,
                     'type_id' => array_rand($arTypes),
@@ -80,8 +81,8 @@ class GenerateController extends AbstractActionController
         $competitors = $this->competitorTable->fetchAll();
 
         // Populate Competitors
-        if ($competitors->count() < 50) {
-            for ($i = $competitors->count(); $i < 50; $i++) {
+        if ($competitors->count() < 40) {
+            for ($i = 0; $i < 40; $i++) {
                 $data = [
                     'name' => $this->faker->name
                 ];
