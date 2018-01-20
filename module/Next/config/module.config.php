@@ -22,12 +22,13 @@ return [
                     ],
                 ],
             ],
-            'get-generate' => [
-                'type' => Segment::class,
+            'next-get' => [
+                'type'    => Segment::class,
                 'options' => [
-                    'route' => '/get[/:action]',
+                    'route'       => '/get[/:action[/:id]]',
                     'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
                     ],
                     'defaults'    => [
                         'controller' => Controller\GetController::class,
