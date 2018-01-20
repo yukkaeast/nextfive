@@ -48,7 +48,7 @@ class GetController extends AbstractActionController
     public function nextAction()
     {
         /** @var \Zend\Db\Sql\Sql $nextSql */
-        $nextSql = $this->raceTable->getTableGateway()->getSql();
+        $nextSql = $this->raceTable->getSql();
 
         /** @var \Zend\Db\Sql\Select $nextSql */
         $nextSelect = $nextSql->select();
@@ -86,7 +86,7 @@ class GetController extends AbstractActionController
         }
 
         /** @var \Zend\Db\Sql\Sql $nextSql */
-        $raceSql = $this->raceTable->getTableGateway()->getSql();
+        $raceSql = $this->raceTable->getSql();
 
         /** @var \Zend\Db\Sql\Select $nextSql */
         $raceSelect = $raceSql->select();
@@ -112,7 +112,7 @@ class GetController extends AbstractActionController
 
 
         /** @var \Zend\Db\Sql\Sql $nextSql */
-        $competitorRaceSql = $this->competitorRaceTable->getTableGateway()->getSql();
+        $competitorRaceSql = $this->competitorRaceTable->getSql();
 
         /** @var \Zend\Db\Sql\Select $nextSql */
         $competitorRaceSelect = $competitorRaceSql->select();

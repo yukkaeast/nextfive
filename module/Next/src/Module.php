@@ -8,7 +8,6 @@ namespace Next;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\ResultSet\ResultSet;
 
 class Module
 {
@@ -46,7 +45,6 @@ class Module
                     $tableGateway = new TableGateway('competitor_race', $dbAdapter);
                     return new Model\CompetitorRaceTable($tableGateway);
                 }
-
             ],
         ];
     }

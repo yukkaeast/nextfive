@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package Next
+ * @author Yury Ostapenko
+ */
 
 namespace Next\Model;
 
@@ -15,11 +19,19 @@ abstract class AbstractTable
     }
 
     /**
-     * @return TableGatewayInterface
+     * @return TableGateway
      */
     public function getTableGateway()
     {
         return $this->tableGateway;
+    }
+
+    /**
+     * @return \Zend\Db\Sql\Sql
+     */
+    public function getSql()
+    {
+        return $this->tableGateway->getSql();
     }
 
     public function fetchAll()
