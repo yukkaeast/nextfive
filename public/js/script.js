@@ -31,7 +31,7 @@ $(function () {
 
                             $('.js-countdown').each(function () {
                                 var $this = $(this),
-                                    finalDate = moment(new Date($this.text() + ' UTC')).format("YYYY/MM/DD hh:mm:ss");
+                                    finalDate = moment(new Date($this.text() + ' UTC')).format("YYYY/MM/DD HH:mm:ss");
 
                                 $this.countdown(finalDate, {
                                     elapse: false
