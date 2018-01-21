@@ -1,5 +1,11 @@
 # Next 5
 
+To make it easy for the customers to place bets on upcoming races that are close to starting, the Next 5 app displays next five upcoming races, sorted by time.
+
+Demo: [http://next5.yuryostapenko.com/](http://next5.yuryostapenko.com/)
+
+## Set Up
+
 Environment based on ZendSkeletonApplication
 
 ```bash

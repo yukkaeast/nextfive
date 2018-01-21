@@ -16,6 +16,7 @@ $(function () {
         }
         isRenderingNext = true;
         if ($('#next-handlebars-container')[0]) {
+            $('#next-handlebars-container').fadeOut();
             $.ajax({
                 url: "/get/next",
                 method: "GET",
@@ -42,7 +43,6 @@ $(function () {
                                     renderNext();
                                 });
                             });
-                            isRenderingNext = false;
 
                             if (!data.races.length) {
                                 var interval = window.setInterval(function () {
@@ -55,6 +55,9 @@ $(function () {
                                     }
                                 }, 1000);
                             }
+
+                            isRenderingNext = false;
+                            $('#next-handlebars-container').fadeIn();
                         }
                     }
                 }
