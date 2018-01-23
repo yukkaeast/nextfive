@@ -4,7 +4,7 @@
  */
 
 Handlebars.registerHelper('formateDate', function (date) {
-    return moment(new Date(date + ' UTC')).format('MMMM Do YYYY, h:mm:ss a');
+    return moment(new Date(date.replace(" ", "T")+"Z")).format('MMMM Do YYYY, h:mm:ss a');
 });
 
 $(function () {
@@ -32,7 +32,7 @@ $(function () {
 
                             $('.js-countdown').each(function () {
                                 var $this = $(this),
-                                    finalDate = moment(new Date($this.text() + ' UTC')).format("YYYY/MM/DD HH:mm:ss");
+                                    finalDate = moment(new Date($this.text().replace(" ", "T")+"Z")).format("YYYY/MM/DD HH:mm:ss");
 
                                 $this.countdown(finalDate, {
                                     elapse: false
